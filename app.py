@@ -2,7 +2,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 
 class RenderRequestHandler(BaseHTTPRequestHandler):
-
     def do_GET(self):
         try:
             self.send_response(200)
@@ -17,9 +16,6 @@ class RenderRequestHandler(BaseHTTPRequestHandler):
 
 def run_server(server_address=('localhost', 8080)):
     httpd = HTTPServer(server_address, RenderRequestHandler)
-    logging.basicConfig(level=logging.INFO)
-    logging.info(f'Starting httpd on {server_address[0]}:{server_address[1]}...')
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    print('Starting server on port 8080...')
     httpd.serve_forever()
-
-if __name__ == '__main__':
-    run_server()
